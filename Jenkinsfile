@@ -9,7 +9,7 @@ pipeline{
         stage('SCM'){
             steps{
                 git branch: 'main', credentialsId: 'github',
-                    url: 'https://github.com/muhtarmamatov/Employee-Leave-Management-System'
+                    url: 'https://github.com/muhtarmamatov/EMS'
             }
         }
         stage('Maven Build'){
@@ -20,7 +20,7 @@ pipeline{
         }
         stage('Docker Build'){
             steps{
-               sh 'docker build . -t muktarbek/elms:${DOCKER_TAG}'
+               sh 'docker build . -t muktarbek/ems:${DOCKER_TAG}'
             }
 
         }
@@ -29,15 +29,15 @@ pipeline{
                 withCredentials([string(credentialsId: 'docker-user', variable: 'dockerHubPwd')]) {
                     sh "docker login -u muktarbek -p ${dockerHubPwd}"
                  }
-               sh 'docker push  muktarbek/elms:${DOCKER_TAG}'
+               sh 'docker push  muktarbek/ems:${DOCKER_TAG}'
             }
 
         }
         stage('Docker Deploy'){
                     steps{
                         ansiblePlaybook credentialsId: 'dev-server', disableHostKeyChecking: true,
-                        extras: "-e DOCKER_TAG=${DOCKER_TAG} -e RUNNING_TAG=${RUNNING_TAG}
-                        -e PREVIOUS_TAG=${PREVIOUS_TAG}", installation: 'Ansible',
+                        extras: "-e DOCKER_TAG=${DOCKER_TAG} -e RUNNING_TAG=${RUNNING_TAG} -e PREVIOUS_TAG=${PREVIOUS_TAG}",
+                         installation: 'Ansible',
                         inventory: 'dev.inv', playbook: 'docker-deploy.yml'
                     }
         }
