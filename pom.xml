@@ -14,7 +14,7 @@
         <version>2.4.3</version>
     </parent>
 
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
