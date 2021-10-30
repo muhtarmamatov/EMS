@@ -1,0 +1,117 @@
+<div class='active' id="sidebar" xmlns:th="http://www.thymeleaf.org">
+	<div class="sidebar-wrapper active">
+		<div class="sidebar-header" style="height: 50px;margin-top: -30px">
+			<i class="fa fa-users text-success me-4"></i>
+			<span>ELMS</span>
+		</div>
+		<div class="sidebar-menu">
+			<ul class="menu">
+				<li class="sidebar-item active ">
+					<a class='sidebar-link' th:href="@{/admin/dashboard}">
+						<i class="fa fa-home text-success"></i>
+						<span th:utext="#{label.dashboard}"></span>
+					</a>
+				</li>
+				<li class="sidebar-item  has-sub">
+					<a class='sidebar-link' href="#">
+						<i class="fa fa-building text-success"></i>
+						<span th:utext="#{label.department}"></span>
+					</a>
+					<ul class="submenu">
+						<li>
+							<a th:href="@{/admin/addDepartment}" th:utext="#{label.add-department}"></a>
+						</li>
+						<li>
+							<a th:href="@{/admin/manageDepartment}" th:utext="#{label.manage-department}"></a>
+						</li>
+					</ul>
+				</li>
+				<li class="sidebar-item  has-sub">
+					<a class='sidebar-link' href="#">
+						<i class="fa fa-table text-success"></i>
+						<span th:utext="#{label.designation}"></span>
+					</a>
+					<ul class="submenu ">
+						<li>
+							<a th:href="@{/admin/addDesignation}" th:utext="#{label.add-designation}">
+								<i class="fa fa-plus-circle"></i>
+							</a>
+						</li>
+						<li>
+							<a th:href="@{/admin/manageDesignation}" th:utext="#{label.manage-designation}"></a>
+						</li>
+					</ul>
+				</li>
+				<li class="sidebar-item  has-sub">
+					<a class='sidebar-link' href="#">
+						<i class="fa fa-users text-success"></i>
+						<span th:utext="#{label.employee}"></span>
+					</a>
+					<ul class="submenu ">
+						<li>
+							<a th:href="@{/admin/addEmployee}" th:utext="#{label.add-employee}"></a>
+						</li>
+						<li>
+							<a th:href="@{/admin/manageEmployee}" th:utext="#{label.manage-employee}"></a>
+						</li>
+					</ul>
+				</li>
+				<li class="sidebar-item  has-sub">
+					<a class='sidebar-link' href="#">
+						<i class="fa fa-table text-success"></i>
+						<span th:utext="#{label.leave-type}"></span>
+					</a>
+					<ul class="submenu ">
+						<li>
+							<a th:href="@{/admin/addLeaveType}" th:utext="#{label.add-leave-type}"></a>
+						</li>
+						<li>
+							<a th:href="@{/admin/manageLeaveType}" th:utext="#{label.manage-leave-type}"></a>
+						</li>
+					</ul>
+				</li>
+				<li class="sidebar-item  has-sub">
+					<a class='sidebar-link' href="#">
+						<i class="fa fa-table text-success"></i>
+						<span th:utext="#{label.leave-management}">Leave Management</span>
+					</a>
+					<ul class="submenu ">
+						<li>
+							<a th:href="@{/admin/allLeaves}" th:utext="#{label.all-leaves}">All Leaves</a>
+						</li>
+						<li>
+							<a th:href="@{/admin/pendingLeaves}" th:utext="#{label.pending-leaves}">Pending Leaves</a>
+						</li>
+						<li>
+							<a th:href="@{/admin/approveLeaves}" th:utext="#{label.approved-leaves}">Approve Leaves</a>
+						</li>
+						<li>
+							<a th:href="@{/admin/notApprovedLeaves}" th:utext="#{label.not-approved-leaves}">Not Approve Leaves</a>
+						</li>
+					</ul>
+				</li>
+				<!--<li class="sidebar-item  has-sub">
+					<a class='sidebar-link' href="#">
+						<i class="fa fa-user text-success"></i>
+						<span>Users</span>
+					</a>
+					<ul class="submenu ">
+						<li>
+							<a href="add_user.html">Add User</a>
+						</li>
+						<li>
+							<a href="manage_user.html">Manage Users</a>
+						</li>
+					</ul>
+				</li>-->
+				<li class="sidebar-item ">
+					<a class='sidebar-link' th:href="@{/admin/reports}">
+						<i class="fa fa-chart-bar text-success"></i>
+						<span th:utext="#{label.reports}">Reports</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+	</div>
+</div>
