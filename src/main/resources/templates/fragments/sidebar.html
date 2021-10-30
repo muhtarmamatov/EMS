@@ -17,12 +17,12 @@
 						<i class="fa fa-building text-success"></i>
 						<span th:utext="#{label.department}"></span>
 					</a>
-					<ul class="submenu ">
+					<ul class="submenu">
 						<li>
 							<a th:href="@{/admin/addDepartment}" th:utext="#{label.add-department}"></a>
 						</li>
 						<li>
-							<a th:href="@{/admin/manageDepartment}" th:utext="#{label.manage-department}">Manage Department</a>
+							<a th:href="@{/admin/manageDepartment}" th:utext="#{label.manage-department}"></a>
 						</li>
 					</ul>
 				</li>
@@ -33,10 +33,12 @@
 					</a>
 					<ul class="submenu ">
 						<li>
-							<a th:href="@{/admin/addDesignation}" th:utext="#{label.add-designation}"></a>
+							<a th:href="@{/admin/addDesignation}" th:utext="#{label.add-designation}">
+								<i class="fa fa-plus-circle"></i>
+							</a>
 						</li>
 						<li>
-							<a th:href="@{/admin/manageDesignation}"  th:utext="#{label.manage-designation}">/a>
+							<a th:href="@{/admin/manageDesignation}" th:utext="#{label.manage-designation}"></a>
 						</li>
 					</ul>
 				</li>

@@ -905,7 +905,7 @@ footer {
     list-style: none;
     max-height: 0;
     transition: max-height .5s ease-out;
-    overflow: hidden
+    overflow: hidden;
 }
 
 .sidebar-wrapper .menu .submenu.active {
@@ -923,7 +923,7 @@ footer {
 }
 
 .sidebar-wrapper .menu .submenu li a:hover {
-    margin-left: .3rem
+    margin-left: .2rem
 }
 
 @media screen and (max-width: 767px) {

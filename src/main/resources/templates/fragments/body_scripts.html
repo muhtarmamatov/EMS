@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html lang="en"
-						xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-						xmlns:th="http://www.thymeleaf.org">
-<th:block layout:insert="~{fragments/htmlhead}"/>
-<body>
-<div id="app">
-	<th:block layout:replace="~{fragments/sidebar}"/>
-	<div id="main">
-		<th:block layout:replace="~{fragments/navigation}"/>
-		<th:block layout:fragment="content"/>
-	</div>
-</div>
-<th:block layout:fragment="body_end"/>
-<th:block layout:replace="~{fragments/body_scripts :: end}"/>
-</body>
-</html>
+<th:block layout:fragment="end"
+										xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+										xmlns:th="http://www.thymeleaf.org">
+	<script th:src="@{/js/feather-icons/feather.min.js}"></script>
+	<script th:src="@{/css/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js}"></script>
+	<script th:src="@{/js/app.js}"></script>
+	<script th:src="@{/css/assets/vendors/chartjs/Chart.min.js}"></script>
+	<script th:src="@{/css/assets/vendors/apexcharts/apexcharts.min.js}"></script>
+	<script th:src="@{/js/pages/dashboard.js}"></script>
+	<script th:src="@{/js/main.js}"></script>
+	<script th:src="@{/js/application.js}"></script>
+</th:block>
