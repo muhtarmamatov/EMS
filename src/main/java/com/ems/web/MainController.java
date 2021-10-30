@@ -12,4 +12,9 @@ public class MainController {
     public String getLoginScreen(){
         return "/public/login";
     }
+
+    @GetMapping("/index")
+    public String getIndexPage(){
+        return "/public/index";
+    }
 }
