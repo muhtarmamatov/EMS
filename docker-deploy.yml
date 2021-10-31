@@ -18,10 +18,10 @@
             - "{{ docker_volume }}:/var/lib/mysql:rw"
           restart: true
           env:
-            MYSQL_ROOT_PASSWORD: 123123
+            MYSQL_ROOT_PASSWORD: "123123"
             MYSQL_DATABASE: ems
             MYSQL_USER: airmanas
-            MYSQL_PASSWORD: 123123
+            MYSQL_PASSWORD: "123123"
       when: not result.exists
 
 
