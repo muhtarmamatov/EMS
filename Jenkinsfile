@@ -34,12 +34,11 @@ pipeline{
 
         }
         stage('Docker Deploy'){
-                    steps{
-                        ansiblePlaybook credentialsId: 'dev-server', disableHostKeyChecking: true,
-                        extras: "-e DOCKER_TAG=${DOCKER_TAG} -e RUNNING_TAG=${RUNNING_TAG} -e PREVIOUS_TAG=${PREVIOUS_TAG}",
-                         installation: 'Ansible',
-                        inventory: 'dev.inv', playbook: 'docker-deploy.yml'
-                    }
+            steps{
+                ansiblePlaybook credentialsId: 'dev-server',
+                disableHostKeyChecking: true, installation: 'Ansible',
+                inventory: 'dev.ini', playbook: 'docker-deploy.yml'
+            }
         }
     }
 }
@@ -47,13 +46,4 @@ pipeline{
 def getVersion(){
     def commitHash = sh returnStdout: true, script: 'git rev-parse --short HEAD'
     return commitHash
-}
-
-def getRunningDockerTag(){
-    def runningTag = sh returnStdout: true,script: 'git rev-parse --short HEAD~1'
-    return runningTag
-}
-def getPreviousTag(){
-    def previousTag = sh returnStdout: true,script: 'git rev-parse --short HEAD~2'
-    return previousTag
 }

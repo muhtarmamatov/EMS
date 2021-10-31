@@ -1,24 +1,29 @@
 ---
 - hosts: dev
   become: True
+  vars:
+    docker_volume: db_data
+    db_name: ems
   tasks:
-
-    - name: Get if any container running
+    - name: Get DB info
       docker_container_info:
-        name: {{RUNNING_TAG}}
-      register: Status
+        name: "{{ db_name }}"
+      register: result
 
-    - name: Stop container if it is running
+    - name: Run command when mysql not exist or not running
       docker_container:
-        name: {{RUNNING_TAG}}
-        state: stopped
-        when: Status.container.Status == "running"
+          name: "{{ db_name }}"
+          image: mysql:8.0.27
+          volumes:
+            - "{{ docker_volume }}:/var/lib/mysql:rw"
+          restart: true
+          alias:
+            - "{{ db_name }}"
+          env:
+            MYSQL_ROOT_PASSWORD: 123123
+            MYSQL_DATABASE: ems
+            MYSQL_USER: airmanas
+            MYSQL_PASSWORD: 123123
+      when: not result.exists
 
-    - name: Start the container
-      docker_container:
-        name: {{DOCKER_TAG}}
-        image: "muktarbek/ems:{{DOCKER_TAG}}"
-        state: started
-        pull: true
-        published_ports:
-          - 0.0.0.0:8080:8080
+
