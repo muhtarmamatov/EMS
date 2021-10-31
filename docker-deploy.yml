@@ -17,7 +17,7 @@
           volumes:
             - "{{ docker_volume }}:/var/lib/mysql:rw"
           restart: true
-          alias:
+          aliases:
             - "{{ db_name }}"
           env:
             MYSQL_ROOT_PASSWORD: 123123
