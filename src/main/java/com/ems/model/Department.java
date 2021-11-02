@@ -15,8 +15,11 @@ public class Department extends AbstractEntity{
     @Column(name = "DEPARTMENT_SHORT_NAME")
     private String shortName;
 
-    @Column(name = "DEPARTMENT_NAME")
-    private String departmentName;
+    @Column(name = "DEPARTMENT_NAME_EN")
+    private String departmentNameEN;
+
+    @Column(name = "DEPARTMENT_NAME_RU")
+    private String departmentNameRU;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "MANAGER_ID")
