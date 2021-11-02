@@ -13,8 +13,6 @@ public class AdminController {
     public String getAddEmployeeScreen(Model model){
         return "/admin/add_employee";
     }
-
-
     @GetMapping("/add_department")
     public String getDepartmentAddScreen(Model model){
         return "/admin/add_department";
