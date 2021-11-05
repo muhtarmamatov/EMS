@@ -36,18 +36,16 @@ class DepartmentServiceImplTest {
 
     @Test
     void findDepartmentByNameNotFound() {
-        when(repository.findDepartmentByDepartmentNameENOrDepartmentNameRU
-                (anyString(),anyString())).thenReturn(Optional.empty());
 
-        ApplicationServiceException e =
-                assertThrows(ApplicationServiceException.class,() ->
-                        target.findDepartmentByName("Department01",
-                                "Department02"));
-       Mockito.verify(repository,Mockito.times(1))
-               .findDepartmentByDepartmentNameENOrDepartmentNameRU("Department01",
-                       "Department02");
-        assertEquals(e.getType(), ApplicationServiceExceptionType.RECORD_NOT_FOUND_EXCEPTION);
+        when(repository.findDepartmentByDepartmentNameENOrDepartmentNameRU(anyString(),anyString()))
+                .thenReturn(Optional.empty());
 
+        ApplicationServiceException e = assertThrows(ApplicationServiceException.class,
+                () -> target.findDepartmentByName("Dep01"));
+
+        /*verify(repository,times(1)).findDepartmentByDepartmentNameENOrDepartmentNameRU(
+                "Dep01","Отдел01");*/
+        assertEquals(ApplicationServiceExceptionType.RECORD_NOT_FOUND_EXCEPTION,e.getType());
     }
 
     @Test
@@ -76,12 +74,12 @@ class DepartmentServiceImplTest {
         Department department = createDepartment();
         Page<Department> departments = new PageImpl<>(Collections.singletonList(department));
         Pageable page = PageRequest.of(1,1);
-        when(repository.findDepartmentByName(anyString(),eq(page))).thenReturn(departments);
+        when(repository.findDepartmentByDepartmentNameENContainingOrDepartmentNameRUContaining(anyString(),anyString(),eq(page))).thenReturn(departments);
         Page<Department> result = target.findDepartmentByName("Department01",page);
 
         Department name = result.getContent().get(0);
 
-        verify(repository,times(1)).findDepartmentByName("Department01",page);
+        verify(repository,times(1)).findDepartmentByDepartmentNameENContainingOrDepartmentNameRUContaining("Department01","Department01",page);
         assertNotNull(result.getContent());
         assertEquals(1,result.getTotalElements());
         assertEquals("Department01",name.getDepartmentNameEN());

@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface DepartmentService {
-    Department findDepartmentByName(String departmentNameEn,String departmentNameRu);
+    Department findDepartmentByName(String departmentName);
     Page<Department> findAll(Pageable pageable);
     Page<Department> findDepartmentByName(String keyword, Pageable pageable);
     void addDepartment(Department department);

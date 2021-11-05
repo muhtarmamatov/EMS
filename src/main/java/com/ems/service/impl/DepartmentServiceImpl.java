@@ -26,23 +26,24 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     @Transactional(readOnly = true)
-    public Department findDepartmentByName(String departmentNameEn,String departmentNameRu) {
+    public Department findDepartmentByName(String departmentName) {
         return repository.findDepartmentByDepartmentNameENOrDepartmentNameRU
-                (departmentNameEn,departmentNameRu).orElseThrow(() ->
+                (departmentName,departmentName).orElseThrow(() ->
                 new ApplicationServiceException(ApplicationServiceExceptionType
                         .RECORD_NOT_FOUND_EXCEPTION));
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Department> findAll(Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<Department> findDepartmentByName(String keyword, Pageable pageable) {
+        return repository
+                .findDepartmentByDepartmentNameENContainingOrDepartmentNameRUContaining(keyword,keyword,pageable);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Department> findDepartmentByName(String keyword, Pageable pageable) {
-        return repository.findDepartmentByName(keyword,pageable);
+    public Page<Department> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     @Override
