@@ -17,4 +17,18 @@ public class MainController {
     public String getIndexPage(){
         return "/public/index";
     }
+
+    @GetMapping("/apply_leave")
+    public String getApplyLeaveScreen(){
+        return "/public/apply_leave";
+    }
+    @GetMapping("/update_password")
+    public String getUpdatePasswordScreen(){
+        return "/public/update_password";
+    }
+    @GetMapping("/update_profile")
+    public String getUpdateProfileScreen(){
+        return "/public/update_profile";
+    }
+
 }

@@ -7,7 +7,7 @@
 		<div class="sidebar-menu">
 			<ul class="menu">
 				<li class="sidebar-item active ">
-					<a class='sidebar-link' th:href="@{/admin/dashboard}">
+					<a class='sidebar-link' th:href="@{/manager/dashboard}">
 						<i class="fa fa-home text-success"></i>
 						<span th:utext="#{label.dashboard}"></span>
 					</a>
@@ -19,10 +19,10 @@
 					</a>
 					<ul class="submenu">
 						<li>
-							<a th:href="@{/admin/addDepartment}" th:utext="#{label.add-department}"></a>
+							<a th:href="@{/admin/add_department}" th:utext="#{label.add-department}"></a>
 						</li>
 						<li>
-							<a th:href="@{/admin/manageDepartment}" th:utext="#{label.manage-department}"></a>
+							<a th:href="@{/admin/manage_department}" th:utext="#{label.manage-department}"></a>
 						</li>
 					</ul>
 				</li>
@@ -33,12 +33,12 @@
 					</a>
 					<ul class="submenu ">
 						<li>
-							<a th:href="@{/admin/addDesignation}" th:utext="#{label.add-designation}">
+							<a th:href="@{/admin/add_designation}" th:utext="#{label.add-designation}">
 								<i class="fa fa-plus-circle"></i>
 							</a>
 						</li>
 						<li>
-							<a th:href="@{/admin/manageDesignation}" th:utext="#{label.manage-designation}"></a>
+							<a th:href="@{/admin/manage_designation}" th:utext="#{label.manage-designation}"></a>
 						</li>
 					</ul>
 				</li>
@@ -49,10 +49,10 @@
 					</a>
 					<ul class="submenu ">
 						<li>
-							<a th:href="@{/admin/addEmployee}" th:utext="#{label.add-employee}"></a>
+							<a th:href="@{/admin/add_employee}" th:utext="#{label.add-employee}"></a>
 						</li>
 						<li>
-							<a th:href="@{/admin/manageEmployee}" th:utext="#{label.manage-employee}"></a>
+							<a th:href="@{/admin/manage_employee}" th:utext="#{label.manage-employee}"></a>
 						</li>
 					</ul>
 				</li>
@@ -63,10 +63,10 @@
 					</a>
 					<ul class="submenu ">
 						<li>
-							<a th:href="@{/admin/addLeaveType}" th:utext="#{label.add-leave-type}"></a>
+							<a th:href="@{/admin/add_leave_type}" th:utext="#{label.add-leave-type}"></a>
 						</li>
 						<li>
-							<a th:href="@{/admin/manageLeaveType}" th:utext="#{label.manage-leave-type}"></a>
+							<a th:href="@{/admin/manage_leave_types}" th:utext="#{label.manage-leave-type}"></a>
 						</li>
 					</ul>
 				</li>
@@ -77,33 +77,19 @@
 					</a>
 					<ul class="submenu ">
 						<li>
-							<a th:href="@{/admin/allLeaves}" th:utext="#{label.all-leaves}">All Leaves</a>
+							<a th:href="@{/admin/all_leaves}" th:utext="#{label.all-leaves}">All Leaves</a>
 						</li>
 						<li>
-							<a th:href="@{/admin/pendingLeaves}" th:utext="#{label.pending-leaves}">Pending Leaves</a>
+							<a th:href="@{/manager/pending_leaves}" th:utext="#{label.pending-leaves}">Pending Leaves</a>
 						</li>
 						<li>
-							<a th:href="@{/admin/approveLeaves}" th:utext="#{label.approved-leaves}">Approve Leaves</a>
+							<a th:href="@{/manager/approved_leaves}" th:utext="#{label.approved-leaves}">Approve Leaves</a>
 						</li>
 						<li>
-							<a th:href="@{/admin/notApprovedLeaves}" th:utext="#{label.not-approved-leaves}">Not Approve Leaves</a>
+							<a th:href="@{/manager/not_approved_leaves}" th:utext="#{label.not-approved-leaves}">Not Approve Leaves</a>
 						</li>
 					</ul>
 				</li>
-				<!--<li class="sidebar-item  has-sub">
-					<a class='sidebar-link' href="#">
-						<i class="fa fa-user text-success"></i>
-						<span>Users</span>
-					</a>
-					<ul class="submenu ">
-						<li>
-							<a href="add_user.html">Add User</a>
-						</li>
-						<li>
-							<a href="manage_user.html">Manage Users</a>
-						</li>
-					</ul>
-				</li>-->
 				<li class="sidebar-item ">
 					<a class='sidebar-link' th:href="@{/admin/reports}">
 						<i class="fa fa-chart-bar text-success"></i>

@@ -1,0 +1,84 @@
+<html lang="en" layout:decorate="~{layout}" with:title="Phone Book"
+						xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+						xmlns:th="http://www.thymeleaf.org"
+						xmlns:with="http://www.thymeleaf.org/extras/with">
+<th:block layout:fragment="content">
+	<div class="main-content container-fluid">
+		<div class="page-title">
+			<div class="row">
+				<div class="col-12 col-md-6 order-md-1 order-last">
+					<h3 th:utext="#{label.add-leave-type}">Add Leave Type</h3>
+				</div>
+				<div class="col-12 col-md-6 order-md-2 order-first">
+					<nav aria-label="breadcrumb" class='breadcrumb-header'>
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a class="text-success" href="#" th:utext="#{label.dashboard}">Dashboard</a></li>
+							<li aria-current="page" class="breadcrumb-item active" th:utext="#{label.add-leave-type}">Add Leave Type</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		
+		</div>
+		
+		
+		<!-- Basic Vertical form layout section start -->
+		<section id="basic-vertical-layouts">
+			<div class="row match-height">
+				<div class="col-md-8 col-12">
+					<div class="card">
+						<div class="card-content">
+							<div class="card-body">
+								<form class="form form-vertical">
+									<div class="form-body">
+										<div class="row">
+											<div class="col-12">
+												<div class="form-group has-icon-left">
+													<label for="first-name-icon" th:utext="#{label.leave-type.name}">Leave Name</label>
+													<div class="position-relative">
+														<input class="form-control" id="first-name-icon" th:utext="#{placeholder.leave-type.name}" type="text">
+														<div class="form-control-icon">
+															<i class="fa fa-table"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col-12">
+												<div class="form-group has-icon-left">
+													<label for="email-id-icon" th:utext="#{description}">Description</label>
+													<div class="position-relative">
+														<input class="form-control" id="email-id-icon" th:utext="#{placeholder.description}" type="text">
+														<div class="form-control-icon">
+															<i class="fa fa-table"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col-12">
+												<div class="form-group has-icon-left">
+													<label for="email-id-icon" th:utext="#{label.leave-type.allowed-days}">Number of days Allowed</label>
+													<div class="position-relative">
+														<input class="form-control" id="email-id-icon" th:placeholder="#{placeholder.leave-type.allowed-days}" type="text">
+														<div class="form-control-icon">
+															<i class="fa fa-table"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+											
+											<div class="col-12 d-flex justify-content-end">
+												<button class="btn btn-primary me-1 mb-1" type="submit" th:utext="#{label.submit.button}">Submit</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- // Basic Vertical form layout section end -->
+	</div>
+</th:block>
+</html>
