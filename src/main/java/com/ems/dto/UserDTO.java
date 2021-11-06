@@ -12,6 +12,8 @@ import java.util.List;
 @Builder
 public class UserDTO {
 
+    private Long id;
+
     private String emailAddress;
 
     private String nameRU;

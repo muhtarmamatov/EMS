@@ -2,6 +2,8 @@ package com.ems.service.impl;
 
 import com.ems.dto.UserDTO;
 import com.ems.dto.mapper.UserMapper;
+import com.ems.exceptions.ApplicationServiceException;
+import com.ems.exceptions.constant.ApplicationServiceExceptionType;
 import com.ems.model.Employee;
 import com.ems.model.constant.AccountStatus;
 import com.ems.repository.EmployeeRepository;
@@ -47,6 +49,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Transactional
     public void addEmployee(Employee employee) {
         repository.save(employee);
+    }
+
+    @Override
+    public Employee findEmployeeById(Long id) {
+        return repository.findById(id).orElseThrow(() ->
+                new ApplicationServiceException(ApplicationServiceExceptionType
+                        .RECORD_NOT_FOUND_EXCEPTION));
     }
 
 

@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -63,5 +64,10 @@ public class DesignationServiceImpl implements DesignationService {
             throw new ApplicationServiceException(ApplicationServiceExceptionType.RECORD_NOT_FOUND_EXCEPTION);
         }
         repository.delete(designation.get());
+    }
+
+    @Override
+    public List<Designation> findAll() {
+        return repository.findAll();
     }
 }

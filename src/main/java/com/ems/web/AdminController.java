@@ -1,5 +1,8 @@
 package com.ems.web;
 
+import com.ems.service.DepartmentService;
+import com.ems.service.DesignationService;
+import com.ems.service.EmployeeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +11,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+
+    private final EmployeeService employeeService;
+
+    private final DepartmentService departmentService;
+
+    private final DesignationService designationService;
+
+    public AdminController(EmployeeService employeeService,
+                           DepartmentService departmentService,
+                           DesignationService designationService) {
+        this.employeeService = employeeService;
+        this.departmentService = departmentService;
+        this.designationService = designationService;
+    }
+
 
     @GetMapping("/add_employee")
     public String getAddEmployeeScreen(Model model){

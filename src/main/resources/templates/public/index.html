@@ -23,56 +23,94 @@
 		</div>
 		<section class="section">
 			<div class="card">
+				<div class="card-header">
+						<form action="#">
+								<div class="col-6">
+								<div class="form-group has-icon-right">
+									<div class="position-relative">
+										<input type="hidden" id="pageSize" name="pageSize" th:value="${pager.getSelectedPageSize()}"/>
+										<input type="hidden" id="page" name="page" th:value="1"/>
+										<input type="text" id="first-name-icon" name="search" th:value="${search}"  class="form-control" placeholder="Search"/>
+										<div class="form-control-icon">
+											<i class="fa fa-search"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+				</div>
 				<div class="card-body">
 					<table class='table' id="table1">
 						<thead>
 						<tr>
 							<th>#</th>
 							<th>Full Name</th>
+							<th>Mobile Number</th>
+							<th>Phone Ext</th>
 							<th>Department</th>
-							<th>Status</th>
-							<th>Reg Date</th>
+							<th>Designation</th>
+							<th>Supervisor</th>
 							<th>Action</th>
 						</tr>
 						</thead>
 						<tbody>
-						<tr>
-							<td>123456</td>
-							<td>John Doe</td>
-							<td>IT</td>
-							<td>
-								<span class="badge bg-success">Active</span>
-							</td>
-							<td>2021-11-01</td>
-							<td><a href="#"><i class="fa fa-pen text-success"></i></a>
-								<a href="#"><i class="fa fa-trash text-danger"></i></a></td>
+						<tr th:if="${employees.getTotalElements() <= 0 }">
+							<td colspan="8">Employee phone book is empty please fill with the data</td>
 						</tr>
-						<tr>
-							<td>153424</td>
-							<td>Jane Doe</td>
-							<td>HR</td>
+						<tr th:if="${employees.getTotalElements() > 0 }" th:each="employee,i : ${employees}">
+							<td th:text="${i.count}"></td>
+							<td th:text="${employee.nameEN}"></td>
+							<td th:text="${employee.mobileNumber}"></td>
+							<td th:text="${employee.phoneExt}"></td>
+							<td th:text="${employee.department.departmentNameEN}"></td>
+							<td th:text="${employee.designation.positionNameEN}"></td>
+							<td th:text="${employee.managerNameEN}"></td>
 							<td>
-								<span class="badge bg-danger">Deactivated</span>
+								<a href="#"><i class="fa fa-pen text-success"></i></a>
+								<a href="#"><i class="fa fa-trash text-danger"></i></a>
 							</td>
-							<td>2021-11-01</td>
-							<td><a href="#"><i class="fa fa-pen text-success"></i></a>
-								<a href="#"><i class="fa fa-trash text-danger"></i></a></td>
-						</tr>
-						<tr>
-							<td>564355</td>
-							<td>Juan Dela Cruz</td>
-							<td>ENGINEERING</td>
-							<td>
-								<span class="badge bg-success">Active</span>
-							</td>
-							<td>2021-11-01</td>
-							<td><a href="#">
-								<i class="fa fa-pen text-success"></i></a>
-								<a href="#"><i class="fa fa-trash text-danger">
-								</i></a></td>
 						</tr>
 						</tbody>
 					</table>
+				</div>
+				
+				<div class="card-footer">
+					<div class="row">
+						<div class="col-sm-2">
+							<div class="d-flex flex-row">
+								<select id="pageSizeSelect">
+									<option th:each="pageSize : ${pager.getPageSizes()}" th:text="${pageSize}" th:value="${pageSize}"
+																	th:selected="${pageSize} == ${pager.getSelectedPageSize()}"></option>
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-10" th:if="${employees.getTotalPages() > 1}">
+							<div class="d-flex flex-row-reverse">
+								<ul class="pagination">
+									
+									<li th:class="${employees.getNumber() == 0} ? disabled">
+										<a class="page-link" th:href="@{/(pageSize=${pager.getSelectedPageSize()}, page=1, search=${search})}">&laquo;</a>
+									</li>
+									
+									<li th:class="${employees.getNumber() == 0} ? disabled">
+										<a class="page-link" th:href="@{/(pageSize=${pager.getSelectedPageSize()}, page=${employees.getNumber()}, search=${search})}">&larr;</a>
+									</li>
+									<li th:class="${employees.getNumber() == (page - 1)} ? 'active pointer-disabled'"
+													th:each="page : ${#numbers.sequence(pager.getStartPage(), pager.getEndPage())}">
+										<a class="page-link" th:href="@{/(pageSize=${pager.getSelectedPageSize()}, page=${page}, search=${search})}" th:text="${page}">
+										</a>
+									</li>
+									<li th:class="${employees.getNumber() + 1 == employees.getTotalPages()} ? disabled">
+										<a class="page-link" th:href="@{/(pageSize=${pager.getSelectedPageSize()}, page=${employees.getNumber() + 2}, search=${search})}">&rarr;
+										</a>
+									</li>
+									<li th:class="${employees.getNumber() + 1 == employees.getTotalPages()} ? disabled">
+										<a class="page-link" th:href="@{/(pageSize=${pager.getSelectedPageSize()},page=${employees.getTotalPages()}, search=${search})}">&raquo;</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>

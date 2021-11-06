@@ -21,4 +21,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
             "OR e.nameEN LIKE CONCAT('%',?1,'%') OR d.departmentNameEN LIKE CONCAT('%',?1,'%') " +
             "OR d.departmentNameRU LIKE CONCAT('%',?1,'%')")
     Page<Employee> findByNameOrDepartment(String keyword, Pageable pageable);
+
 }

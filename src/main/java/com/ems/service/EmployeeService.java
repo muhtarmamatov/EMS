@@ -16,4 +16,6 @@ public interface EmployeeService {
     Page<UserDTO> findByNameOrDepartment(String keyword, Pageable pageable);
 
     void addEmployee(Employee employee);
+
+    Employee findEmployeeById(Long id);
 }

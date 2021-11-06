@@ -4,6 +4,8 @@ import com.ems.model.Designation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface DesignationService {
 
     Page<Designation> findAll(Pageable pageable);
@@ -15,4 +17,6 @@ public interface DesignationService {
     void addDesignation(Designation designation);
 
     void removeDesignation(Long id);
+
+    List<Designation> findAll();
 }
