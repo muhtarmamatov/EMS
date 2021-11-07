@@ -1,5 +1,7 @@
 package com.ems.web;
 
+import com.ems.dto.CreateUserRequest;
+import com.ems.model.constant.RoleType;
 import com.ems.service.DepartmentService;
 import com.ems.service.DesignationService;
 import com.ems.service.EmployeeService;
@@ -29,6 +31,11 @@ public class AdminController {
 
     @GetMapping("/add_employee")
     public String getAddEmployeeScreen(Model model){
+
+        model.addAttribute("request",new CreateUserRequest());
+        model.addAttribute("managers",employeeService.findAccountByRoleName(RoleType.MANAGER));
+        model.addAttribute("departments",departmentService.findAll());
+        model.addAttribute("designations",designationService.findAll());
         return "/admin/add_employee";
     }
     @GetMapping("/add_department")

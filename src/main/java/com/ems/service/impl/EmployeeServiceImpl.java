@@ -6,6 +6,7 @@ import com.ems.exceptions.ApplicationServiceException;
 import com.ems.exceptions.constant.ApplicationServiceExceptionType;
 import com.ems.model.Employee;
 import com.ems.model.constant.AccountStatus;
+import com.ems.model.constant.RoleType;
 import com.ems.repository.EmployeeRepository;
 import com.ems.repository.projections.EmployeeStatusView;
 import com.ems.service.EmployeeService;
@@ -14,7 +15,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -46,16 +49,22 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    @Transactional
-    public void addEmployee(Employee employee) {
-        repository.save(employee);
-    }
-
-    @Override
     public Employee findEmployeeById(Long id) {
         return repository.findById(id).orElseThrow(() ->
                 new ApplicationServiceException(ApplicationServiceExceptionType
                         .RECORD_NOT_FOUND_EXCEPTION));
+    }
+
+    @Override
+    public List<UserDTO> findAccountByRoleName(RoleType type) {
+        return repository.findEmployeeByRoleName(type.getName())
+                .stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public void addEmployee(Employee employee) {
+        repository.save(employee);
     }
 
 

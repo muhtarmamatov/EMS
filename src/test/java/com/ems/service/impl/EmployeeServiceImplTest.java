@@ -3,6 +3,7 @@ package com.ems.service.impl;
 import com.ems.dto.UserDTO;
 import com.ems.model.Employee;
 import com.ems.model.constant.AccountStatus;
+import com.ems.model.constant.RoleType;
 import com.ems.repository.EmployeeRepository;
 import com.ems.repository.projections.EmployeeStatusView;
 import org.junit.jupiter.api.BeforeEach;
@@ -81,6 +82,16 @@ class EmployeeServiceImplTest {
         assertEquals(birthDate,user.getBirthDay());
     }
 
+    @Test
+    void findAccountByRoleName() {
+        Employee manager = createUser();
+        when(repository.findEmployeeByRoleName(anyString())).thenReturn(Collections.singletonList(manager));
+
+        List<UserDTO> result = target.findAccountByRoleName(RoleType.MANAGER);
+
+        assertEquals(manager.getNameEN(),result.get(0).getNameEN());
+    }
+
     private Employee createUser() {
         Employee madina = new Employee();
         madina.setNameEN("Madina Sulaiman kyzy");
@@ -91,4 +102,6 @@ class EmployeeServiceImplTest {
         madina.setHiredDate(LocalDate.now());
         return madina;
     }
+
+
 }

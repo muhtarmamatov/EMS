@@ -28,9 +28,21 @@
 			<div class="row match-height">
 				<div class="col-12">
 					<div class="card">
+						<ul class="list-group list-group-flush"
+										th:if="${#lists.isEmpty(managers) or #lists.isEmpty(departments) or #lists.isEmpty(designations)}">
+							<li class="list-group-item" th:if="${#lists.isEmpty(managers)}">
+								<a th:href="@{/admin/add_employee}" th:text="#{link.add.managers}"></a></li>
+							<li class="list-group-item" th:if="${#lists.isEmpty(departments)}">
+								<a th:href="@{/admin/add_department}" th:text="#{link.add.departments}"></a>
+							</li>
+							<li class="list-group-item" th:if="${#lists.isEmpty(designations)}">
+								<a th:href="@{/admin/add_designations}" th:text="#{link.add.designations}"></a>
+							</li>
+						</ul>
 						<div class="card-content">
-							<div class="card-body">
-								<form class="form" method="post" th:href="@{/admin/createAccount}" th:object="${employee}">
+							<div class="card-body"
+												th:unless="${#lists.isEmpty(managers) or #lists.isEmpty(departments) or #lists.isEmpty(designations)}">
+								<form class="form" method="post" th:href="@{/admin/createAccount}" th:object="${request}">
 									<div class="row">
 										
 										<div class="col-md-4 col-12">
@@ -201,7 +213,8 @@
 											<div class="form-group has-icon-left">
 												<label for="contact-name-icon" th:text="#{label.contact.full-name}"></label>
 												<div class="position-relative">
-													<input class="form-control" id="contact-name-icon" th:placeholder="#{placeholder.contact.full-name}" type="text"/>
+													<input class="form-control" id="contact-name-icon" th:placeholder="#{placeholder.contact.full-name}"
+																				type="text"/>
 													<div class="form-control-icon">
 														<i class="fa fa-user"></i>
 													</div>
