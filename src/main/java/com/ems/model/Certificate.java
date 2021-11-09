@@ -1,13 +1,14 @@
 package com.ems.model;
 
+import com.ems.model.constant.CertificateStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-@Table(name = "T_EMPLOYEE")
+@Table(name = "T_CERTIFICATE")
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Certificate extends AbstractEntity {
@@ -15,10 +16,10 @@ public class Certificate extends AbstractEntity {
     @Column(name = "CERTIFICATE_NAME")
     private String certificateName;
 
-    @Column(name = "VALID_DATE")
-    private LocalDate validDate;
+    @Column(name = "CERTIFICATE_STATUS")
+    @Enumerated(EnumType.STRING)
+    private CertificateStatus certificateStatus;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "EMPLOYEE_ID")
-    private Employee employee;
+    @OneToMany(mappedBy = "certificate",cascade = CascadeType.ALL)
+    private List<EmployeeCertifications> employeeCertifications;
 }

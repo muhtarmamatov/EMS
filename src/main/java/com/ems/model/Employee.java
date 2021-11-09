@@ -66,9 +66,6 @@ public class Employee extends AbstractEntity{
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "employee")
-    private List<Certificate> certificates;
-
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "employee")
     private List<Contact> contacts;
 
@@ -78,6 +75,10 @@ public class Employee extends AbstractEntity{
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "VACATION_DAYS_ID")
     private VacationDays vacationDays;
+
+
+    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
+    private List<EmployeeCertifications> employeeCertifications;
 
     @ManyToOne
     @JoinColumn(name = "MANAGER_ID")

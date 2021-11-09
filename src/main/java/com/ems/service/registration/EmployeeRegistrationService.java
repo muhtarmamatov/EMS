@@ -45,7 +45,6 @@ public class EmployeeRegistrationService {
         Activation activation = generator.generate();
         UserMapper mapper = new UserMapper();
         Employee employee = mapper.toEntity(request);
-        employee.setCertificates(Collections.emptyList());
         employee.setActivationCode(activation.getActivationCode());
         employee.setManager(setManager(request.getManagerId()));
         employee.setVacationDays(setVacationDays(employee));
