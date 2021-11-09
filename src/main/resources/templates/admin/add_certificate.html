@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout}" with:title="Phone Book"
+						xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+						xmlns:th="http://www.thymeleaf.org"
+						xmlns:with="http://www.thymeleaf.org/extras/with">
+
+<th:block layout:fragment="content">
+	<div class="main-content container-fluid">
+		<div class="page-title">
+			<div class="row">
+				<div class="col-12 col-md-6 order-md-1 order-last">
+					<h3 th:utext="#{label.certificate}"></h3>
+				</div>
+				<div class="col-12 col-md-6 order-md-2 order-first">
+					<nav aria-label="breadcrumb" class='breadcrumb-header'>
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a class="text-success" href="#" th:utext="#{label.dashboard}"></a></li>
+							<li aria-current="page" class="breadcrumb-item active" th:utext="#{label.certificate}"></li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Basic Vertical form layout section start -->
+	<section id="basic-vertical-layouts">
+		<div class="row match-height">
+			<div class="col-md-8 col-12">
+				<div class="card">
+					<div class="card-content">
+						<div class="card-body">
+							<form class="form form-vertical">
+								<div class="form-body">
+									<div class="row">
+										<div class="col-12">
+											<div class="form-group has-icon-left">
+												<label for="first-name-icon" th:utext="#{label.certificate-name}"></label>
+												<div class="position-relative">
+													<input class="form-control" id="first-name-icon"
+																				th:placeholder="#{placeholder.certificate-name}" type="text">
+													<div class="form-control-icon">
+														<i class="fa fa-table"></i>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-12">
+											<div class="form-group">
+												<label for="country-floating" th:text="#{label.certificate-status}"></label>
+												<fieldset class="form-group">
+													<select class="form-select" id="basicSelect">
+														<option>Applicable</option>
+														<option>Not Applicable</option>
+													</select>
+												</fieldset>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</th:block>
+</html>

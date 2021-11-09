@@ -47,6 +47,7 @@ public class EmployeeRegistrationService {
         Employee employee = mapper.toEntity(request);
         employee.setActivationCode(activation.getActivationCode());
         employee.setManager(setManager(request.getManagerId()));
+        employee.setEmployeeCertifications(Collections.emptyList());
         employee.setVacationDays(setVacationDays(employee));
         employee.setVacations(Collections.emptyList());
         employeeService.addEmployee(employee);

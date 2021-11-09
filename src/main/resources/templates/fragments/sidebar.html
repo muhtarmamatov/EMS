@@ -28,7 +28,7 @@
 				</li>
 				<li class="sidebar-item  has-sub">
 					<a class='sidebar-link' href="#">
-						<i class="fa fa-table text-success"></i>
+						<i class="fa fa-map-pin text-success"></i>
 						<span th:utext="#{label.designation}"></span>
 					</a>
 					<ul class="submenu ">
@@ -39,6 +39,20 @@
 						</li>
 						<li>
 							<a th:href="@{/admin/manage_designation}" th:utext="#{label.manage-designation}"></a>
+						</li>
+					</ul>
+				</li>
+				<li class="sidebar-item  has-sub">
+					<a class='sidebar-link' href="#">
+						<i class="fa fa-certificate text-success"></i>
+						<span th:utext="#{label.certificate}"></span>
+					</a>
+					<ul class="submenu ">
+						<li>
+							<a th:href="@{/admin/add_certificate}" th:utext="#{label.add-certificate}"></a>
+						</li>
+						<li>
+							<a th:href="@{/admin/manage_certificates}" th:utext="#{label.manage-certificate}"></a>
 						</li>
 					</ul>
 				</li>
@@ -58,7 +72,7 @@
 				</li>
 				<li class="sidebar-item  has-sub">
 					<a class='sidebar-link' href="#">
-						<i class="fa fa-table text-success"></i>
+						<i class="fa fa-plane-departure text-success"></i>
 						<span th:utext="#{label.leave-type}"></span>
 					</a>
 					<ul class="submenu ">
@@ -72,7 +86,7 @@
 				</li>
 				<li class="sidebar-item  has-sub">
 					<a class='sidebar-link' href="#">
-						<i class="fa fa-table text-success"></i>
+						<i class="fa fa-chart-pie text-success"></i>
 						<span th:utext="#{label.leave-management}">Leave Management</span>
 					</a>
 					<ul class="submenu ">

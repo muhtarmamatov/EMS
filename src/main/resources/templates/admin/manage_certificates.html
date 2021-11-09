@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout}" with:title="Phone Book"
+						xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+						xmlns:th="http://www.thymeleaf.org"
+						xmlns:with="http://www.thymeleaf.org/extras/with">
+<th:block layout:fragment="content">
+	<div class="main-content container-fluid">
+		<div class="page-title">
+			<div class="row">
+				<div class="col-12 col-md-6 order-md-1 order-last">
+					<h3 th:utext="#{label.manage-department}"></h3>
+				</div>
+				<div class="col-12 col-md-6 order-md-2 order-first">
+					<nav aria-label="breadcrumb" class='breadcrumb-header'>
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a class="text-success" href="#" th:utext="#{label.dashboard}"></a></li>
+							<li aria-current="page" class="breadcrumb-item active" th:utext="#{label.manage-department}"></li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+		<section class="section">
+			<div class="card">
+				<div class="card-body">
+					<table class='table' id="table1">
+						<thead>
+						<tr>
+							<th>#</th>
+							<th>Certificate Name</th>
+							<th>Certificate Status</th>
+							<th>Creation Date</th>
+							<th>Action</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>1</td>
+							<td>Service Passport</td>
+							<td>APPLICABLE</td>
+							<td>2021-11-01</td>
+							<td><a href="#">
+								<i class="fa fa-pen text-success"></i></a>
+								<a href="#">
+									<i class="fa fa-trash text-danger">
+									</i></a></td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
+	</div>
+</th:block>
+</html>

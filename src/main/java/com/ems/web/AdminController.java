@@ -58,6 +58,15 @@ public class AdminController {
         return "/admin/manage_designation";
     }
 
+    @GetMapping("/add_certificate")
+    public String getCertificateAddScreen(Model model){
+        return "/admin/add_certificate";
+    }
+
+    @GetMapping("/manage_certificates")
+    public String getManageCertificateScreen(Model model){
+        return "/admin/manage_certificates";
+    }
 
     @GetMapping("/add_leave_type")
     public String getAddLeaveTypeScreen(Model model){

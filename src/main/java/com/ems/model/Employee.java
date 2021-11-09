@@ -77,7 +77,7 @@ public class Employee extends AbstractEntity{
     private VacationDays vacationDays;
 
 
-    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<EmployeeCertifications> employeeCertifications;
 
     @ManyToOne
