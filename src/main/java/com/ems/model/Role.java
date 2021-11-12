@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -17,6 +18,7 @@ import java.util.List;
 public class Role extends AbstractEntity{
 
     @Column(name = "ROLE_NAME")
+    @NotBlank(message = "{validation.role-name-required}")
     private String roleName;
 
     @Column(name = "ROLE_DESCRIPTION")

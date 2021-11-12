@@ -22,7 +22,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.Collection;
 import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -53,7 +52,7 @@ class EmployeeRegistrationServiceTest {
                 () -> target.register(request));
 
         verify(service,times(1)).getAccountStatus("some@some.com");
-        assertEquals(ApplicationServiceExceptionType.EMAIL_ADDRESS_ALREAADY_TAKEN_EXCEPTION,e.getType());
+        assertEquals(ApplicationServiceExceptionType.EMAIL_ADDRESS_ALREADY_TAKEN_EXCEPTION,e.getType());
     }
 
     @Test

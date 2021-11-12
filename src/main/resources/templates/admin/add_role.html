@@ -1,0 +1,75 @@
+<html lang="en" layout:decorate="~{layout}" with:title="Add Role"
+						xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+						xmlns:th="http://www.thymeleaf.org"
+						xmlns:with="http://www.thymeleaf.org/extras/with">
+<th:block layout:fragment="content">
+	<div class="main-content container-fluid">
+		<div class="page-title">
+			<div class="row">
+				<div class="col-12 col-md-6 order-md-1 order-last">
+					<h3 th:utext="#{label.add-role}">Add Role</h3>
+				</div>
+				<div class="col-12 col-md-6 order-md-2 order-first">
+					<nav aria-label="breadcrumb" class='breadcrumb-header'>
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a class="text-success" th:href="@{/admin/dashboard}" th:utext="#{label.dashboard}">Dashboard</a>
+							</li>
+							<li aria-current="page" class="breadcrumb-item active" th:utext="#{label.add-role}">Add Designation</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Basic Vertical form layout section start -->
+	<section id="basic-vertical-layouts">
+		<div class="row match-height">
+			<div class="col-md-8 col-12">
+				<div class="card">
+					<div class="card-content">
+						<div class="alert alert-dismissible fade show" th:unless="${#strings.isEmpty(errors)}">
+							<span th:utext="${errors}" class="text-danger"></span>
+							<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+						</div>
+						<div class="card-body">
+							<form class="form form-vertical" action="#" th:action="@{/admin/add_new_role}" th:object="${role}"   method="post">
+								<div class="form-body">
+									<div class="row">
+										<div class="col-12">
+											<div class="form-group has-icon-left">
+												<label for="first-name-icon" th:utext="#{label.role-name}">Designation Name</label>
+												<div class="position-relative">
+													<input class="form-control" id="first-name-icon" th:field="*{roleName}" name="roleName" th:placeholder="#{placeholder.role-name}" type="text">
+													<div class="form-control-icon">
+														<i class="fa fa-table"></i>
+													</div>
+													<span class="text-danger" th:errors="*{roleName}" th:if="${#fields.hasErrors('roleName')}"></span>
+												</div>
+											</div>
+										</div>
+										<div class="col-12">
+											<div class="form-group has-icon-left">
+												<label for="first-name-icon" th:utext="#{label.role-description}">Designation Name</label>
+												<div class="position-relative">
+													<input class="form-control" id="first-name-icon" th:field="*{roleDescription}" name="roleDescription" th:placeholder="#{placeholder.role-description}" type="text">
+													<div class="form-control-icon">
+														<i class="fa fa-table"></i>
+													</div>
+													<span class="text-danger"  th:errors="*{roleDescription}" th:if="${#fields.hasErrors('roleDescription')}"></span>
+												</div>
+											</div>
+										</div>
+										<div class="col-12 d-flex justify-content-end">
+											<button class="btn btn-primary me-1 mb-1" th:utext="#{label.submit.button}" type="submit"></button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</th:block>
+</html>

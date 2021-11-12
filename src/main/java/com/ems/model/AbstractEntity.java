@@ -6,7 +6,7 @@ import java.time.Instant;
 @MappedSuperclass
 public abstract class AbstractEntity {
 
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 

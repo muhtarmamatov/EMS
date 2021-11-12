@@ -1,0 +1,9 @@
+ALTER table t_employee modify id bigint not null auto_increment;
+ALTER table t_certificate modify id bigint not null auto_increment;
+ALTER table t_contact modify id bigint not null auto_increment;
+ALTER table t_department modify id bigint not null auto_increment;
+ALTER table t_designation modify id bigint not null auto_increment;
+ALTER table employee_certificate_tracking modify id bigint not null auto_increment;
+ALTER table t_role modify id bigint not null auto_increment;
+ALTER table t_vacation modify id bigint not null auto_increment;
+ALTER table t_vacation_days modify id bigint not null auto_increment;
