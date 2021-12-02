@@ -26,44 +26,70 @@
 				<div class="col-md-8 col-12">
 					<div class="card">
 						<div class="card-content">
+							<div class="alert alert-danger alert-dismissible fade show" th:unless="${#strings.isEmpty(error)}">
+								<span class="text-dark" th:utext="${error}"></span>
+								<button class="btn-close" data-bs-dismiss="alert" type="button"></button>
+							</div>
 							<div class="card-body">
-								<form class="form form-vertical">
+								<form class="form form-vertical" method="post" th:action="@{/admin/add_department}" th:object="${department}">
 									<div class="form-body">
 										<div class="row">
 											<div class="col-12">
 												<div class="form-group has-icon-left">
-													<label for="first-name-icon" th:utext="#{label.department.shot-name}"></label>
+													<label for="shortName" th:utext="#{label.department.shot-name}"></label>
 													<div class="position-relative">
-														<input class="form-control" id="first-name-icon"
-																					th:placeholder="#{placeholder.department.shot-name}" type="text">
+														<input class="form-control" id="shortName" th:field="*{shortName}" th:placeholder="#{placeholder.department.shot-name}" type="text">
 														<div class="form-control-icon">
 															<i class="fa fa-table"></i>
 														</div>
 													</div>
+													<ul class="text-danger" th:errors="*{shortName}" th:if="${#fields.hasErrors('shortName')}">
+														<li th:each="error : ${#fields.errors('shortName')}" th:text="${error}">error</li>
+													</ul>
 												</div>
 											</div>
 											<div class="col-12">
 												<div class="form-group has-icon-left">
-													<label for="email-id-icon" th:utext="#{label.department.full-name}"></label>
+													<label for="email-id-icon" th:utext="#{label.department.full-name.en}"></label>
 													<div class="position-relative">
-														<input class="form-control" id="email-id-icon" th:placeholder="#{placeholder.department.full-name}"
+														<input class="form-control" id="email-id-icon" th:field="*{departmentNameEN}"
+																					th:placeholder="#{placeholder.department.full-name.en}"
 																					type="text">
 														<div class="form-control-icon">
 															<i class="fa fa-table"></i>
 														</div>
+														<!--<span class="text-danger" th:errors="*{departmentNameEN}" th:if="${#fields.hasErrors('departmentNameEN')}"></span>-->
 													</div>
+													<ul class="text-danger" th:errors="*{departmentNameEN}" th:if="${#fields.hasErrors('departmentNameEN')}">
+														<li th:each="error : ${#fields.errors('departmentNameEN')}" th:text="${error}">error</li>
+													</ul>
+												</div>
+											</div>
+											<div class="col-12">
+												<div class="form-group has-icon-left">
+													<label for="email-id-icon" th:utext="#{label.department.full-name.ru}"></label>
+													<div class="position-relative">
+														<input class="form-control" id="email-id-icon" th:field="*{departmentNameRU}"
+																					th:placeholder="#{placeholder.department.full-name.ru}"
+																					type="text">
+														<div class="form-control-icon">
+															<i class="fa fa-table"></i>
+														</div>
+														<!--<span class="text-danger"  th:if="${#fields.hasErrors('departmentNameRU')}"></span>-->
+													</div>
+													<ul class="text-danger" th:errors="*{departmentNameRU}" th:if="${#fields.hasErrors('departmentNameRU')}">
+														<li th:each="error : ${#fields.errors('departmentNameRU')}" th:text="${error}">error</li>
+													</ul>
 												</div>
 											</div>
 											
 											<div class="col-12">
 												<div class="form-group">
-													<label for="country-floating" th:text="#{label.manager}"></label>
+													<label for="manager" th:text="#{label.manager}"></label>
 													<fieldset class="form-group">
-														<select class="form-select" id="basicSelect">
-															<option>Diana Zhumalieva</option>
-															<option>Talgat Nurbaev</option>
-															<option>Daniyar Arynov</option>
-															<option>Bekzat Alimov</option>
+														<select class="form-select" id="manager" th:field="*{manager.id}">
+															<option th:text="#{placeholder.select.manager}" th:value="0"></option>
+															<option th:each="manager: ${managers}" th:text="${#locale.equals('en')} ? ${manager.nameEN} : ${manager.nameRU}" th:value="${manager.id}"></option>
 														</select>
 													</fieldset>
 												</div>

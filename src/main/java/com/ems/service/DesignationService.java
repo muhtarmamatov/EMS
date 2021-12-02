@@ -1,5 +1,6 @@
 package com.ems.service;
 
+import com.ems.dto.DesignationDTO;
 import com.ems.model.Designation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,4 +20,6 @@ public interface DesignationService {
     void removeDesignation(Long id);
 
     List<Designation> findAll();
+
+    DesignationDTO findDesignationById(Long id);
 }

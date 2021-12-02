@@ -34,7 +34,7 @@ public class EmployeeRegistrationService {
         AccountStatus status = employeeService.getAccountStatus(request.getEmailAddress());
         if (!status.equals(AccountStatus.NOT_REGISTERED)) {
             throw new ApplicationServiceException(ApplicationServiceExceptionType
-                    .EMAIL_ADDRESS_ALREADY_TAKEN_EXCEPTION);
+                    .EMAIL_ADDRESS_IS_ALREADY_TAKEN_EXCEPTION);
         }
 
         Activation activation = saveAccount(request);

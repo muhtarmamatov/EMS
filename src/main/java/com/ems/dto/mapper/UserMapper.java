@@ -10,15 +10,17 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class UserMapper {
 
-    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
 
 
-    public UserDTO toDTO(Employee employee){
+    public static UserDTO toDTO(Employee employee){
         return UserDTO.builder()
                 .id(employee.getId())
                 .nameRU(setValues(employee.getNameRU()))
@@ -38,7 +40,7 @@ public class UserMapper {
 
     }
 
-    public Employee toEntity(CreateUserRequest request){
+    public  Employee toEntity(CreateUserRequest request){
         Employee employee = new Employee();
         employee.setEmailAddress(request.getEmailAddress());
         employee.setNameRU(request.getNameRU());
@@ -55,7 +57,10 @@ public class UserMapper {
         return employee;
     }
 
-    private LocalDate setDate(String date) {
+    public List<UserDTO> toDTO(List<Employee> employees){
+        return employees.stream().map(UserMapper::toDTO).collect(Collectors.toList());
+    }
+    private static LocalDate setDate(String date) {
         if (date.isEmpty()){
             return LocalDate.now();
         }
@@ -68,17 +73,17 @@ public class UserMapper {
         return result;
     }
 
-    private String setManager(Employee employee,final String lang){
+    private static String setManager(Employee employee,final String lang){
         if (employee == null){
             return "";
         }
         return lang.equals("EN") ? employee.getNameEN() : employee.getNameRU();
     }
-    private String setValues(Object type) {
+    private static String setValues(Object type) {
         return Optional.ofNullable(type).map(Object::toString).orElse("");
     }
 
-    private String  dateToString(LocalDate date) {
+    private static String  dateToString(LocalDate date) {
         if ( date == null){
             return "";
         }

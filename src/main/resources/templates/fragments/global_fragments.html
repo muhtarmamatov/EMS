@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+
+
+	<div class="col-6" th:fragment="search">
+		<div class="form-group has-icon-right">
+			<div class="position-relative">
+				<input type="hidden" id="pageSize" name="pageSize" th:value="${pager.getSelectedPageSize()}"/>
+				<input type="hidden" id="page" name="page" th:value="1"/>
+				<input type="text" id="first-name-icon" name="search" th:value="${search}"  class="form-control" placeholder="Search"/>
+				<div class="form-control-icon">
+					<i class="fa fa-search"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="card-footer" th:fragment="pagination(data)">
+		<div class="row">
+			<div class="col-sm-2">
+				<div class="d-flex flex-row">
+					<select id="pageSizeSelect">
+						<option th:each="pageSize : ${pager.getPageSizes()}" th:text="${pageSize}" th:value="${pageSize}"
+														th:selected="${pageSize} == ${pager.getSelectedPageSize()}"></option>
+					</select>
+				</div>
+			</div>
+			<div class="col-sm-10" th:if="${data.getTotalPages() > 1}">
+				<div class="d-flex flex-row-reverse">
+					<ul class="pagination">
+						
+						<li th:class="${data.getNumber() == 0} ? disabled">
+							<a class="page-link" th:href="@{/(pageSize=${pager.getSelectedPageSize()}, page=1, search=${search})}">&laquo;</a>
+						</li>
+						
+						<li th:class="${data.getNumber() == 0} ? disabled">
+							<a class="page-link" th:href="@{/(pageSize=${pager.getSelectedPageSize()}, page=${data.getNumber()}, search=${search})}">&larr;</a>
+						</li>
+						<li th:class="${data.getNumber() == (page - 1)} ? 'active pointer-disabled'"
+										th:each="page : ${#numbers.sequence(pager.getStartPage(), pager.getEndPage())}">
+							<a class="page-link" th:href="@{/(pageSize=${pager.getSelectedPageSize()}, page=${page}, search=${search})}" th:text="${page}">
+							</a>
+						</li>
+						<li th:class="${data.getNumber() + 1 == data.getTotalPages()} ? disabled">
+							<a class="page-link" th:href="@{/(pageSize=${pager.getSelectedPageSize()}, page=${data.getNumber() + 2}, search=${search})}">&rarr;
+							</a>
+						</li>
+						<li th:class="${data.getNumber() + 1 == data.getTotalPages()} ? disabled">
+							<a class="page-link" th:href="@{/(pageSize=${pager.getSelectedPageSize()},page=${data.getTotalPages()}, search=${search})}">&raquo;</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

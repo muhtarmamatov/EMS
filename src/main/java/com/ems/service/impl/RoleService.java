@@ -30,20 +30,20 @@ public class RoleService {
     public Role findByRoleId(Long id){
         return repository.findById(id)
                 .orElseThrow(() -> new ApplicationServiceException
-                        (ApplicationServiceExceptionType.RECORD_NOT_FOUND_EXCEPTION));
+                        (ApplicationServiceExceptionType.NO_SUCH_ELEMENT_EXCEPTION));
     }
 
     @Transactional(readOnly = true)
     public Role findByRoleName(RoleType type){
         return repository.findRoleByRoleName(type.getName())
                 .orElseThrow(() -> new ApplicationServiceException
-                        (ApplicationServiceExceptionType.RECORD_NOT_FOUND_EXCEPTION));
+                        (ApplicationServiceExceptionType.NO_SUCH_ELEMENT_EXCEPTION));
     }
     public void addRole(Role role) {
         Optional<Role> role1 = repository.findRoleByRoleName(role.getRoleName());
         if (role1.isPresent()) {
             throw new ApplicationServiceException(ApplicationServiceExceptionType
-                    .RECORD_ALREADY_EXIST_EXCEPTION);
+                    .ELEMENT_ALREADY_EXIST_EXCEPTION);
         }
         repository.save(role);
     }

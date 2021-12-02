@@ -12,7 +12,8 @@
 				<div class="col-12 col-md-6 order-md-2 order-first">
 					<nav aria-label="breadcrumb" class='breadcrumb-header'>
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a class="text-success" th:href="@{/manager/dashboard}" th:utext="#{label.dashboard}">Dashboard</a></li>
+							<li class="breadcrumb-item"><a class="text-success" th:href="@{/manager/dashboard}"
+																																						th:utext="#{label.dashboard}">Dashboard</a></li>
 							<li aria-current="page" class="breadcrumb-item active" th:utext="#{label.add-designation}">Add Designation</li>
 						</ol>
 					</nav>
@@ -25,35 +26,79 @@
 				<div class="col-md-8 col-12">
 					<div class="card">
 						<div class="card-content">
+							<div class="alert alert-danger alert-dismissible fade show" th:unless="${#strings.isEmpty(error)}">
+								<span class="text-dark" th:utext="${error}"></span>
+								<button class="btn-close" data-bs-dismiss="alert" type="button"></button>
+							</div>
 							<div class="card-body">
-								<form class="form form-vertical">
+								<form class="form form-vertical" method="post" th:action="@{/admin/add_designation}" th:object="${position}">
 									<div class="form-body">
 										<div class="row">
 											<div class="col-12">
 												<div class="form-group has-icon-left">
-													<label for="first-name-icon" th:utext="#{label.designation.full-name}">Designation Name</label>
+													<label for="first-name-icon" th:utext="#{label.designation.full-name.en}"></label>
 													<div class="position-relative">
-														<input class="form-control" id="first-name-icon" placeholder="Input Designation" type="text">
+														<input class="form-control" id="first-name-icon" th:field="*{positionNameEN}"
+																					th:placeholder="#{placeholder.designation.full-name.en}" type="text">
 														<div class="form-control-icon">
-															<i class="fa fa-table"></i>
+															<i class="fa fa-user"></i>
+														</div>
+													</div>
+													<ul class="text-danger" th:errors="*{positionNameEN}" th:if="${#fields.hasErrors('positionNameEN')}">
+														<li th:each="error : ${#fields.errors('positionNameEN')}" th:text="${error}">error</li>
+													</ul>
+												</div>
+											</div>
+											
+											<div class="col-12">
+												<div class="form-group has-icon-left">
+													<label for="first-name-icon" th:utext="#{label.designation.full-name.ru}"></label>
+													<div class="position-relative">
+														<input class="form-control" id="first-name-icon"
+																					th:field="*{positionNameRU}" th:placeholder="#{placeholder.designation.full-name.ru}" type="text">
+														<div class="form-control-icon">
+															<i class="fa fa-user"></i>
+														</div>
+													</div>
+													<ul class="text-danger" th:errors="*{positionNameRU}" th:if="${#fields.hasErrors('positionNameRU')}">
+														<li th:each="error : ${#fields.errors('positionNameRU')}" th:text="${error}">error</li>
+													</ul>
+												</div>
+											</div>
+											
+											<div class="col-12">
+												<div class="form-group has-icon-left">
+													<label for="email-id-icon" th:utext="#{label.designation.description}">Description</label>
+													<div class="position-relative">
+														<input class="form-control" id="email-id-icon"
+																					th:field="*{positionDescription}" th:placeholder="#{placeholder.designation.description}"
+																					type="text">
+														<div class="form-control-icon">
+															<i class="fa fa-audio-description"></i>
 														</div>
 													</div>
 												</div>
 											</div>
 											<div class="col-12">
-												<div class="form-group has-icon-left">
-													<label for="email-id-icon" th:utext="#{label.designation.description}">Description</label>
-													<div class="position-relative">
-														<input class="form-control" id="email-id-icon" placeholder="Input Description" type="text">
-														<div class="form-control-icon">
-															<i class="fa fa-table"></i>
-														</div>
-													</div>
+												<div class="form-group">
+													<label for="department" th:text="#{label.department}"></label>
+													<fieldset class="form-group">
+														<select class="form-select" id="department" th:field="*{department.id}">
+															<option selected th:text="#{placeholder.select.department}"
+																							th:value="0"></option>
+															<option th:each="department: ${departments}"
+																							th:text="${#locale.toString()} == 'en' ? ${department.departmentNameEN} : ${department.departmentNameRU}"
+																							th:value="${department.id}"></option>
+														</select>
+													</fieldset>
+													<!--<ul class="text-danger" th:errors="*{position.department}" th:if="${#fields.hasErrors('id')}">
+														<li th:each="error : ${#fields.errors('id')}" th:text="${error}">error</li>
+													</ul>-->
 												</div>
 											</div>
 											
 											<div class="col-12 d-flex justify-content-end">
-												<button class="btn btn-primary me-1 mb-1" type="submit" th:utext="#{label.submit.button}">Submit</button>
+												<button class="btn btn-primary me-1 mb-1" th:utext="#{label.submit.button}" type="submit">Submit</button>
 											</div>
 										</div>
 									</div>

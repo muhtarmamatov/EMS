@@ -31,7 +31,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public AccountStatus getAccountStatus(String emailAddress) {
-        Optional<EmployeeStatusView> status = repository.getAccountStatusByEmailAddress(emailAddress);
+        Optional<EmployeeStatusView> status =
+                repository.getAccountStatusByEmailAddress(emailAddress);
         if (status.isPresent()){
             return status.get().getAccountStatus();
         }
@@ -40,25 +41,25 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Page<UserDTO> findAll(Pageable pageable) {
-        return repository.findAll(pageable).map(this::toDTO);
+        return repository.findAll(pageable).map(UserMapper::toDTO);
     }
 
     @Override
     public Page<UserDTO> findByNameOrDepartment(String keyword, Pageable pageable) {
-        return repository.findByNameOrDepartment(keyword,pageable).map(this::toDTO);
+        return repository.findByNameOrDepartment(keyword,pageable).map(UserMapper::toDTO);
     }
 
     @Override
     public Employee findEmployeeById(Long id) {
         return repository.findById(id).orElseThrow(() ->
                 new ApplicationServiceException(ApplicationServiceExceptionType
-                        .RECORD_NOT_FOUND_EXCEPTION));
+                        .NO_SUCH_ELEMENT_EXCEPTION));
     }
 
     @Override
     public List<UserDTO> findAccountByRoleName(RoleType type) {
         return repository.findEmployeeByRoleName(type.getName())
-                .stream().map(this::toDTO).collect(Collectors.toList());
+                .stream().map(UserMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override
@@ -67,9 +68,4 @@ public class EmployeeServiceImpl implements EmployeeService {
         repository.save(employee);
     }
 
-
-    private UserDTO toDTO(Employee employee) {
-        UserMapper mapper = new UserMapper();
-        return mapper.toDTO(employee);
-    }
 }

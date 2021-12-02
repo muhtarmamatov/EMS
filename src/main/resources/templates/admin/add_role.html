@@ -27,12 +27,12 @@
 			<div class="col-md-8 col-12">
 				<div class="card">
 					<div class="card-content">
-						<div class="alert alert-dismissible fade show" th:unless="${#strings.isEmpty(errors)}">
-							<span th:utext="${errors}" class="text-danger"></span>
+						<div class="alert alert-danger alert-dismissible fade show" th:unless="${#strings.isEmpty(error)}" >
+							<h6 th:text="${error}" class="text-dark"></h6>
 							<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
 						</div>
 						<div class="card-body">
-							<form class="form form-vertical" action="#" th:action="@{/admin/add_new_role}" th:object="${role}"   method="post">
+							<form class="form form-vertical" action="#" th:action="@{/admin/add_role}" th:object="${role}"  method="post">
 								<div class="form-body">
 									<div class="row">
 										<div class="col-12">
