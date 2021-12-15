@@ -9,11 +9,11 @@ import java.util.List;
 
 public interface DesignationService {
 
-    Page<Designation> findAll(Pageable pageable);
+    Page<DesignationDTO> findAll(Pageable pageable);
 
-    Designation findByName(String positionEN,String positionRU);
+    DesignationDTO findByName(String positionEN,String positionRU);
 
-    Page<Designation> findByName(String keyword,Pageable pageable);
+    Page<DesignationDTO> findByName(String keyword,Pageable pageable);
 
     void addDesignation(Designation designation);
 
@@ -22,4 +22,6 @@ public interface DesignationService {
     List<Designation> findAll();
 
     DesignationDTO findDesignationById(Long id);
+
+    void updateDesignation(Long id, Designation position);
 }

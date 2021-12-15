@@ -16,7 +16,8 @@ public enum ApplicationServiceExceptionType {
     NO_SUCH_ELEMENT_EXCEPTION("no-such-element.exception",HttpStatus.NOT_FOUND),
     ELEMENT_ALREADY_EXIST_EXCEPTION("element-already-exist.exception",HttpStatus.BAD_REQUEST),
     INVALID_ENTITY_SELECT_EXCEPTION("invalid-entity-select.exception",HttpStatus.BAD_REQUEST),
-    ENTITY_HAS_DEPENDENCY_EXCEPTION("entity-has-dependency.exception",HttpStatus.NOT_ACCEPTABLE);
+    ENTITY_HAS_DEPENDENCY_EXCEPTION("entity-has-dependency.exception",HttpStatus.NOT_ACCEPTABLE),
+    INVALID_ENTITY_ID_EXCEPTION("invalid-entity-id.exception",HttpStatus.BAD_REQUEST);
 
     private final String code;
     private final HttpStatus httpStatus;

@@ -26,7 +26,7 @@ import java.util.Locale;
 @RequestMapping("/admin")
 public class DepartmentController {
 
-    private final EmployeeService employeeService;
+   /* private final EmployeeService employeeService;
 
     private final DepartmentService departmentService;
 
@@ -117,5 +117,5 @@ public class DepartmentController {
     @ResponseBody
     public List<DepartmentDTO> getDepartments(){
         return departmentService.findAll();
-    }
+    }*/
 }

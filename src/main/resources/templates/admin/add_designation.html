@@ -7,14 +7,14 @@
 		<div class="page-title">
 			<div class="row">
 				<div class="col-12 col-md-6 order-md-1 order-last">
-					<h3 th:utext="#{label.add-designation}">Add Designation</h3>
+					<h3 th:utext="${add} ? #{label.add-designation} : #{modal.designation.title}"></h3>
 				</div>
 				<div class="col-12 col-md-6 order-md-2 order-first">
 					<nav aria-label="breadcrumb" class='breadcrumb-header'>
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a class="text-success" th:href="@{/manager/dashboard}"
 																																						th:utext="#{label.dashboard}">Dashboard</a></li>
-							<li aria-current="page" class="breadcrumb-item active" th:utext="#{label.add-designation}">Add Designation</li>
+							<li aria-current="page" class="breadcrumb-item active" th:utext="${add} ? #{label.add-designation} : #{modal.designation.title}"></li>
 						</ol>
 					</nav>
 				</div>
@@ -26,12 +26,16 @@
 				<div class="col-md-8 col-12">
 					<div class="card">
 						<div class="card-content">
-							<div class="alert alert-danger alert-dismissible fade show" th:unless="${#strings.isEmpty(error)}">
-								<span class="text-dark" th:utext="${error}"></span>
+							<!--	<div class="alert alert-danger alert-dismissible fade show" th:unless="${#strings.isEmpty(error)}">
+									<span class="text-dark" th:utext="${error}"></span>
+									<button class="btn-close" data-bs-dismiss="alert" type="button"></button>
+								</div>-->
+							<div class="alert alert-danger alert-dismissible fade show" th:unless="${#strings.isEmpty(errors)}">
+								<span class="text-dark" th:text="${errors}"></span>
 								<button class="btn-close" data-bs-dismiss="alert" type="button"></button>
 							</div>
 							<div class="card-body">
-								<form class="form form-vertical" method="post" th:action="@{/admin/add_designation}" th:object="${position}">
+								<form class="form form-vertical" method="post" th:object="${position}" th:action="${add} ? '/admin/add_designation' : '/admin/edit_designation/'+${position.id}">
 									<div class="form-body">
 										<div class="row">
 											<div class="col-12">
@@ -44,8 +48,9 @@
 															<i class="fa fa-user"></i>
 														</div>
 													</div>
-													<ul class="text-danger" th:errors="*{positionNameEN}" th:if="${#fields.hasErrors('positionNameEN')}">
-														<li th:each="error : ${#fields.errors('positionNameEN')}" th:text="${error}">error</li>
+													<ul class="text-danger" th:each="error : ${#fields.errors('positionNameEN')}" th:errors="*{positionNameEN}"
+																	th:if="${#fields.hasErrors('positionNameEN')}">
+														<li th:text="${error}">error</li>
 													</ul>
 												</div>
 											</div>
@@ -60,8 +65,9 @@
 															<i class="fa fa-user"></i>
 														</div>
 													</div>
-													<ul class="text-danger" th:errors="*{positionNameRU}" th:if="${#fields.hasErrors('positionNameRU')}">
-														<li th:each="error : ${#fields.errors('positionNameRU')}" th:text="${error}">error</li>
+													<ul class="text-danger" th:each="error : ${#fields.errors('positionNameRU')}" th:errors="*{positionNameRU}"
+																	th:if="${#fields.hasErrors('positionNameRU')}">
+														<li th:text="${error}">error</li>
 													</ul>
 												</div>
 											</div>
@@ -91,9 +97,6 @@
 																							th:value="${department.id}"></option>
 														</select>
 													</fieldset>
-													<!--<ul class="text-danger" th:errors="*{position.department}" th:if="${#fields.hasErrors('id')}">
-														<li th:each="error : ${#fields.errors('id')}" th:text="${error}">error</li>
-													</ul>-->
 												</div>
 											</div>
 											
@@ -106,6 +109,8 @@
 							</div>
 						</div>
 					</div>
+				
+				
 				</div>
 			</div>
 		</section>

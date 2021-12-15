@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -30,22 +31,24 @@ public class DesignationServiceImpl implements DesignationService {
     }
 
     @Override
-    public Page<Designation> findAll(Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<DesignationDTO> findAll(Pageable pageable) {
+        return repository.findAll(pageable).map(DesignationDTO::toDTO);
     }
 
     @Override
-    public Designation findByName(String positionEN,String positionRU) {
+    public DesignationDTO findByName(String positionEN,String positionRU) {
         return repository.findDesignationByPositionNameENOrPositionNameRU(positionEN,positionRU)
-                .orElseThrow(() -> new ApplicationServiceException(ApplicationServiceExceptionType
+                .map(DesignationDTO::toDTO)
+                .orElseThrow(() ->
+                        new ApplicationServiceException(ApplicationServiceExceptionType
                         .NO_SUCH_ELEMENT_EXCEPTION));
     }
 
     @Override
-    public Page<Designation> findByName(String keyword, Pageable pageable) {
+    public Page<DesignationDTO> findByName(String keyword, Pageable pageable) {
         return repository
                 .findDesignationByPositionNameENContainingOrPositionNameRUContaining(
-                        keyword,keyword,pageable);
+                        keyword,keyword,pageable).map(DesignationDTO::toDTO);
     }
 
     @Override
@@ -91,5 +94,25 @@ public class DesignationServiceImpl implements DesignationService {
         return repository.findById(id).map(DesignationDTO::toDTO)
                 .orElseThrow(() -> new ApplicationServiceException(ApplicationServiceExceptionType
                         .NO_SUCH_ELEMENT_EXCEPTION));
+    }
+
+    @Override
+    @Transactional
+    public void updateDesignation(Long id, Designation position) {
+        Optional<Designation> designation = repository.findById(id);
+        if (!designation.isPresent()){
+            throw new ApplicationServiceException(ApplicationServiceExceptionType.INVALID_ENTITY_ID_EXCEPTION);
+        }
+        Optional<Department> department = departmentRepository.findById(position.getDepartment().getId());
+        if (!department.isPresent()){
+            throw new ApplicationServiceException(ApplicationServiceExceptionType.INVALID_ENTITY_SELECT_EXCEPTION);
+        }
+        Designation update = designation.get();
+        update.setId(id);
+        update.setPositionNameEN(position.getPositionNameEN());
+        update.setPositionNameRU(position.getPositionNameRU());
+        update.setPositionDescription(position.getPositionDescription());
+        update.setDepartment(department.get());
+        repository.save(update);
     }
 }

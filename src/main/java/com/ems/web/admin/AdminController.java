@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminController {
 
-
+/*
     private final EmployeeService employeeService;
 
     private final DepartmentService departmentService;
@@ -70,5 +70,5 @@ public class AdminController {
     @GetMapping("/reports")
     public String getReportsScreen(Model model){
         return "/admin/reports";
-    }
+    }*/
 }

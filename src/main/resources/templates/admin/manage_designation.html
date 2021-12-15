@@ -48,9 +48,10 @@
 							<td th:text="${#locale.toString() == 'en' ? position.department.departmentNameEN : position.department.departmentNameRU}"></td>
 							<td th:text="${position.positionDescription}"></td>
 							<td th:text="${#dates.format(position.creationTime,'dd/MMM/yyyy')}"></td>
-							
-							<td><a  id="editDesignation" th:href="@{/admin/edit_designation/{id}(id=${position.id})}"><i class="fa fa-pen text-success"></i></a>
-								<a th:href="@{/admin/delete_designtion/{id}(id=${position.id})}"><i class="fa fa-trash text-danger dbtn"></i></a>
+							<td><a class="ebtn" th:href="@{/admin/edit_designation/{id}(id=${position.id})}">
+								<i class="fa fa-pen text-success"></i></a>
+								<a th:href="@{/admin/delete_designtion/{id}(id=${position.id})}">
+									<i class="fa fa-trash text-danger dbtn"></i></a>
 							</td>
 						</tr>
 						</tbody>
@@ -62,114 +63,47 @@
 	</div>
 	
 	<!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="modalUpdate" tabindex="-1" aria-labelledby="modalUpdateLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+					<h5 class="modal-title" id="modalUpdateLabel" th:utext="#{modal.designation.title}"></h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					<div class="alert alert-danger alert-dismissible fade show" th:unless="${#strings.isEmpty(error)}">
-						<span class="text-dark" th:utext="${error}"></span>
-						<button class="btn-close" data-bs-dismiss="alert" type="button"></button>
-					</div>
 				</div>
 				<div class="modal-body">
+					<div  id="error-dialog" style="display: none">
+						<button class="btn-close" data-bs-dismiss="alert" type="button"></button>
+					</div>
+					<form id="updateForm">
+						<div class="mb-1">
+							<input type="hidden" class="form-control" id="id" name="id"/>
+						</div>
+						<div class="mb-1">
+							<label for="positionNameEN" class="form-label" th:utext="#{label.designation.full-name.en}"></label>
+							<input type="text" class="form-control" id="positionNameEN" name="positionNameEN"/>
+						</div>
+						<div class="mb-1">
+							<label for="positionNameRU" class="form-label" th:utext="#{label.designation.full-name.ru}"></label>
+							<input type="text" class="form-control" id="positionNameRU" name="positionNameRU"/>
+						</div>
+						<div class="mb-1">
+							<label for="positionDescription" class="form-label" th:utext="#{label.designation.full-name.ru}"></label>
+							<textarea id="positionDescription" class="form-control" name="positionDescription"></textarea>
+						</div>
+						<div class="mb-0">
+							<label for="department" th:utext="#{label.department}"></label>
+							<select id="department" class="form-select">
+							</select>
+						</div>
 					
-					<form class="form form-vertical" method="post" th:action="@{/admin/add_designation}" th:object="${position}">
-						<div class="form-body">
-							<div class="row">
-								<div class="col-12">
-									<div class="form-group has-icon-left">
-										<label for="positionNameEN" th:utext="#{label.designation.full-name.en}"></label>
-										<div class="position-relative">
-											<input class="form-control" id="positionNameEN"
-																		th:field="*{positionNameEN}" value="" type="text">
-											<div class="form-control-icon">
-												<i class="fa fa-user"></i>
-											</div>
-										</div>
-										<ul class="text-danger" th:errors="*{positionNameEN}" th:if="${#fields.hasErrors('positionNameEN')}">
-											<li th:each="error : ${#fields.errors('positionNameEN')}" th:text="${error}">error</li>
-										</ul>
-									</div>
-								</div>
-								<div class="col-12">
-									<div class="form-group has-icon-left">
-										<label for="positionNameRU" th:utext="#{label.designation.full-name.en}"></label>
-										<div class="position-relative">
-											<input class="form-control" id="positionNameRU"
-																		th:field="*{positionNameRU}" value="" type="text">
-											<div class="form-control-icon">
-												<i class="fa fa-user"></i>
-											</div>
-										</div>
-										<ul class="text-danger" th:errors="*{positionNameRU}" th:if="${#fields.hasErrors('positionNameEN')}">
-											<li th:each="error : ${#fields.errors('positionNameEN')}" th:text="${error}">error</li>
-										</ul>
-									</div>
-								</div>
-								<div class="col-12">
-									<div class="form-group has-icon-left">
-										<label for="positionDescription" th:utext="#{label.designation.full-name.en}"></label>
-										<div class="position-relative">
-											<input class="form-control" id="positionDescription"
-																		th:field="*{positionDescription}" value="" type="text">
-											<div class="form-control-icon">
-												<i class="fa fa-user"></i>
-											</div>
-										</div>
-										<ul class="text-danger" th:errors="*{positionDescription}" th:if="${#fields.hasErrors('positionNameEN')}">
-											<li th:each="error : ${#fields.errors('positionDescription')}" th:text="${error}">error</li>
-										</ul>
-									</div>
-								</div>
-								<div class="col-12">
-									<div class="form-group">
-										<label for="department" th:text="#{label.department}"></label>
-										<fieldset class="form-group">
-											<select class="form-select" id="department" th:field="*{department.id}">
-											</select>
-										</fieldset>
-									</div>
-								</div>
-							</div>
+						<div class="modal-footer">
+							<button class="btn btn-danger" data-bs-dismiss="modal" aria-hidden="true">Close</button>
+							<button type="submit" class="btn btn-warning float-end" id="update">Submit</button>
 						</div>
 					</form>
-				
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{label.close.button}">Close</button>
-					<button class="btn btn-primary me-1 mb-1" th:utext="#{label.submit.button}" type="submit">Submit</button>
 				</div>
 			</div>
 		</div>
 	</div>
-</th:block>
-<th:block layout:fragment="modal_script">
-	<script type="text/javascript">
-	$(document).ready(function () {
-		 $('#editDesignation').on('click',function (event) {
-       event.preventDefault();
-       var department = "";
-       var href = $(this).attr('href');
-       $.get(href,function (designation) {
-           department += "<option value = '" + designation.department.id + " '>" + designation.department.departmentNameEN + " </option>";
-										$('#positionNameEN').val(designation.positionNameEN);
-										$('#positionNameRU').val(designation.positionNameRU);
-										$('#positionDescription').val(designation.positionDescription);
-										$('#department').append(department);
-       });
-      $('#exampleModal').modal("show");
-   });
-		 $('#department').on('click',function () {
-							var department = "";
-						$.get("/admin/get_departments",function (departments) {
-						    $.each(departments,function (index, d) {
-														$('#department').append("<option value= '"+d.id+"'>" +d.departmentNameEN + "</option>" );
-          });
-      });
-   });
- });
-	</script>
 </th:block>
 </html>
